@@ -3,6 +3,8 @@
 A study website for **বাংলা সাহিত্য** (Bengali literature), built from the source
 file `বাংলা সাহিত্য.html.md`.
 
+[LINK](https://donquixote-doflaming.github.io/Bengaliliterature1/)
+
 The visual language is borrowed from a minimal, grid-driven creative portfolio:
 one screen, twelve columns, hairline rules, monospaced micro-labels, a single
 loud editorial voice — then opened out into a proper reading experience.
