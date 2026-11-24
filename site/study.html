@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>পূর্ণ পাঠ — বাংলা সাহিত্য</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="description" content="বাংলা সাহিত্যের তিন যুগের পূর্ণ পাঠ — চর্যাপদ, শ্রীকৃষ্ণকীর্তন, মঙ্গলকাব্য, বৈষ্ণব পদাবলি থেকে আধুনিক যুগের উপন্যাস ও প্রবন্ধ, ১৩৯ জন লেখকের পরিচিতি।">
+<meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="locked">
+
+<div class="loader" id="loader" role="status" aria-live="polite">
+  <span class="sr">Loading</span>
+  <div class="ld-field" id="ld-field" aria-hidden="true"
+       style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--g)"></div>
+  <p class="ld-count" id="ld-count" aria-hidden="true"><span id="ld-num">0</span><small>%</small></p>
+</div>
+
+<div class="grid" aria-hidden="true"><div class="grid-cols" id="grid-cols"></div></div>
+<div class="grid-spec" id="grid-spec" aria-hidden="true"></div>
+
+<header class="topbar">
+  <a class="tb-logo" href="index.html">
+    <span class="mark">বাংলা সাহিত্য</span>
+    <span class="sep">/</span>
+    <span class="lbl">পূর্ণ পাঠ</span>
+  </a>
+  <div class="tb-tools">
+    <button class="tb-btn" type="button" data-search-open>খুঁজুন<span class="k">⌘K</span></button>
+    <button class="tb-btn" type="button" data-theme-toggle aria-pressed="false" aria-label="অন্ধকার মোড">◐</button>
+    <button class="tb-btn tb-size" type="button" data-size-toggle aria-pressed="false" aria-label="লেখার আকার">ক<i>S</i></button>
+    <button class="tb-btn" type="button" data-grid-toggle aria-pressed="false" aria-label="গ্রিড দেখান">▦<span class="k">G</span></button>
+  </div>
+</header>
+
+<div class="reader">
+  <nav class="rail" id="rail" aria-label="সূচি"></nav>
+  <main class="main doc" id="main"></main>
+  <aside class="aside">
+    <div class="widget">
+      <h5>এই পাতায়</h5>
+      <div class="stat"><span>অংশ</span><b id="s-sec">১২</b></div>
+      <div class="stat"><span>লেখক-কার্ড</span><b id="s-auth">১৩৯</b></div>
+      <div class="stat"><span>প্রশ্ন</span><b id="s-q">৮৮০</b></div>
+      <div class="prog"><i id="prog-bar"></i></div>
+      <p class="lbl">পঠন অগ্রগতি <b id="prog-n">০%</b></p>
+    </div>
+
+    <div class="widget">
+      <h5>লেখক খুঁজুন</h5>
+      <input id="auth-filter" type="search" placeholder="নাম…"
+             style="width:100%;border:1px solid var(--gl);background:none;color:var(--ink);
+                    font:400 16px var(--sans);padding:11px 13px;border-radius:4px;outline:none">
+      <div id="auth-list" class="fade-b" style="margin-top:10px;max-height:44vh;overflow:auto"></div>
+    </div>
+
+    <div class="widget">
+      <h5>দ্রুত যাওয়া</h5>
+      <p style="margin:0"><a href="quiz.html" style="font-size:16px;text-decoration:none;border-bottom:1px solid var(--gl)">অনুশীলনী ও প্রশ্ন →</a></p>
+    </div>
+  </aside>
+</div>
+
+<footer class="foot">
+  <div class="f1"><span id="f-copy">Copyright © 2026. All rights reserved. সর্বস্বত্ব সংরক্ষিত</span></div>
+  <div class="f2"><a href="index.html">প্রথম পাতা</a> · <a href="quiz.html">অনুশীলনী</a> · <a href="#top">উপরে</a></div>
+  <div class="f3">
+    <div class="f3-no">No. <span id="f-no">112026</span></div>
+    <div class="f3-credit">prepared by <b>Rifat</b></div>
+  </div>
+</footer>
+
+<div class="search" id="search" role="dialog" aria-modal="true" aria-label="খুঁজুন">
+  <div class="search-in">
+    <div class="search-bar">
+      <input id="search-input" type="search" placeholder="লেখকের নাম, বইয়ের নাম বা সাল লিখে খুঁজুন।" autocomplete="off">
+      <button class="search-close" id="search-close" aria-label="বন্ধ করুন">✕</button>
+    </div>
+    <div class="az" id="search-az" aria-label="অক্ষর দিয়ে ছাঁকুন"></div>
+    <div class="results" id="search-results"></div>
+  </div>
+</div>
+
+<div class="grain" aria-hidden="true"></div>
+
+<script src="data/site.js"></script>
+<script src="data/read.js"></script>
+<script src="data/quiz.js"></script>
+<script src="app.js"></script>
+<script>
+(function () {
+  var S = window.SITE;
+  var R = window.READ;
+  var BD = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+  function bn(n){ return String(n).split('').map(function(c){ return (c>='0'&&c<='9') ? BD[+c] : c; }).join(''); }
+  function pad(n){ return (n<10?'0':'')+n; }
+
+  document.getElementById('f-copy').textContent = S.meta.copyright;
+  document.getElementById('f-no').textContent = S.meta.no;
+  document.getElementById('s-sec').textContent = bn(S.stats.sections);
+  document.getElementById('s-auth').textContent = bn(S.stats.authors);
+  document.getElementById('s-q').textContent = bn(S.stats.questions);
+
+  /* ---------------- render the document ---------------------------------- */
+  var main = document.getElementById('main');
+  var html = [];
+
+  R.sections.forEach(function (sec, i) {
+    html.push('<section id="' + sec.id + '" data-sec="' + sec.id + '">');
+    html.push('<h2 data-n="' + pad(i + 1) + '">' + sec.title + '</h2>');
+    html.push(sec.html.join(''));
+
+    (sec.subs || []).forEach(function (sub) {
+      html.push('<h3 id="' + sub.id + '">' + sub.title + '</h3>');
+      html.push(sub.html.join(''));
+      (sub.subs || []).forEach(function (s2) {
+        html.push('<h4 id="' + s2.id + '">' + s2.title + '</h4>');
+        html.push(s2.html.join(''));
+        (s2.subs || []).forEach(function (s3) {
+          html.push('<h5 id="' + s3.id + '">' + s3.title + '</h5>');
+          html.push(s3.html.join(''));
+        });
+      });
+    });
+    html.push('</section>');
+  });
+  main.innerHTML = html.join('');
+
+  /* ---------------- table of contents ------------------------------------ */
+  var rail = document.getElementById('rail');
+  var railHTML = '<h4>সূচি</h4><ol>';
+  R.sections.forEach(function (sec, i) {
+    var label = sec.label || sec.title;
+    railHTML += '<li><a href="#' + sec.id + '" data-target="' + sec.id + '">' + label + '</a></li>';
+  });
+  railHTML += '</ol>';
+  rail.innerHTML = railHTML;
+
+  /* ---------------- author explorer ------------------------------------- */
+  var list = document.getElementById('auth-list');
+  function paintAuthors(filter) {
+    var f = (filter || '').trim();
+    var groups = ['প্রাচীন যুগ', 'মধ্যযুগ', 'আধুনিক যুগ'];
+    var out = '';
+    groups.forEach(function (era) {
+      var names = R.authors.filter(function (a) {
+        return a.era === era && (!f || a.name.indexOf(f) >= 0);
+      });
+      if (!names.length) return;
+      out += '<p class="lbl" style="margin:12px 0 6px">' + era + ' <b>' + bn(names.length) + '</b></p>';
+      out += '<ul style="list-style:none;margin:0;padding:0">';
+      names.forEach(function (a) {
+        out += '<li style="margin:0 0 4px"><a href="#' + a.id + '" style="font-size:16px;text-decoration:none;color:var(--ink-2);line-height:1.45;display:block">' + a.name + '</a></li>';
+      });
+      out += '</ul>';
+    });
+    if (!out) out = '<p class="lbl">মিলছে না</p>';
+    list.innerHTML = out;
+  }
+  paintAuthors('');
+  document.getElementById('auth-filter').addEventListener('input', function () {
+    paintAuthors(this.value);
+  });
+
+  /* ---------------- scroll spy + progress -------------------------------- */
+  var links = Array.prototype.slice.call(document.querySelectorAll('[data-target]'));
+  var sections = Array.prototype.slice.call(main.querySelectorAll('section[data-sec]'));
+  var bar = document.getElementById('prog-bar');
+  var pn = document.getElementById('prog-n');
+  var ticking = false;
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      ticking = false;
+      var top = window.scrollY + 140;
+      var current = sections[0];
+      for (var i = 0; i < sections.length; i++) {
+        if (sections[i].offsetTop <= top) current = sections[i];
+      }
+      links.forEach(function (a) {
+        a.classList.toggle('on', a.getAttribute('data-target') === current.getAttribute('data-sec'));
+      });
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var p = h > 0 ? Math.min(1, window.scrollY / h) : 0;
+      bar.style.transform = 'scaleX(' + p + ')';
+      pn.textContent = bn(Math.round(p * 100)) + '%';
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  /* deep links land under the sticky bar */
+  function jumpToHash() {
+    if (!location.hash) return;
+    var t = null;
+    try { t = document.querySelector(decodeURIComponent(location.hash)); } catch (e) { t = null; }
+    if (!t) return;
+    var y = t.getBoundingClientRect().top + window.scrollY - 92;
+    window.scrollTo({ top: y, behavior: 'instant' });
+  }
+  window.addEventListener('load', function () { setTimeout(jumpToHash, 60); });
+  setTimeout(jumpToHash, 900);
+})();
+</script>
+</body>
+</html>

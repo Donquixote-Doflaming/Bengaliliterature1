@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>অনুশীলনী ও প্রশ্ন — বাংলা সাহিত্য</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="description" content="বাংলা সাহিত্যের ৮৮০টি অনুশীলনী প্রশ্ন ও উত্তর — চর্যাপদ থেকে মুক্তিযুদ্ধ পর্যন্ত।">
+<meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="locked">
+
+<div class="loader" id="loader" role="status" aria-live="polite">
+  <span class="sr">Loading</span>
+  <div class="ld-field" id="ld-field" aria-hidden="true"
+       style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--g)"></div>
+  <p class="ld-count" id="ld-count" aria-hidden="true"><span id="ld-num">0</span><small>%</small></p>
+</div>
+
+<div class="grid" aria-hidden="true"><div class="grid-cols" id="grid-cols"></div></div>
+<div class="grid-spec" id="grid-spec" aria-hidden="true"></div>
+
+<header class="topbar">
+  <a class="tb-logo" href="index.html">
+    <span class="mark">বাংলা সাহিত্য</span>
+    <span class="sep">/</span>
+    <span class="lbl">অনুশীলনী</span>
+  </a>
+  <nav class="tb-nav" aria-label="অংশ">
+    <a href="study.html">পূর্ণ পাঠ</a>
+    <a href="study.html#writers">লেখক-কার্ড</a>
+    <a href="study.html#tables">সারণি</a>
+  </nav>
+  <div class="tb-tools">
+    <button class="tb-btn" type="button" data-search-open>খুঁজুন<span class="k">⌘K</span></button>
+    <button class="tb-btn" type="button" data-theme-toggle aria-pressed="false" aria-label="অন্ধকার মোড">◐</button>
+    <button class="tb-btn tb-size" type="button" data-size-toggle aria-pressed="false" aria-label="লেখার আকার">ক<i>S</i></button>
+    <button class="tb-btn" type="button" data-grid-toggle aria-pressed="false" aria-label="গ্রিড দেখান">▦<span class="k">G</span></button>
+  </div>
+</header>
+
+<div class="quizwrap">
+  <aside class="quizside">
+    <div class="widget">
+      <h5>অবস্থা</h5>
+      <div class="stat"><span>মোট প্রশ্ন</span><b id="q-total">৮৮০</b></div>
+      <div class="stat"><span>দেখা হয়েছে</span><b id="q-seen">০</b></div>
+      <div class="prog"><i id="q-bar"></i></div>
+      <p class="lbl">অগ্রগতি <b id="q-pct">০%</b></p>
+    </div>
+
+    <div class="widget">
+      <h5>ছাঁটি</h5>
+      <input id="q-filter" type="search" placeholder="প্রশ্ন খুঁজুন…"
+             style="width:100%;border:1px solid var(--gl);background:none;color:var(--ink);
+                    font:400 16px var(--sans);padding:11px 13px;border-radius:4px;outline:none">
+      <p class="lbl" style="margin-top:10px">শর্টকাট</p>
+      <p class="lbl" style="margin-top:6px;color:var(--ink-2);text-transform:none;letter-spacing:0;line-height:1.7">
+        স্পেস — উত্তর দেখান<br>← → — প্রশ্ন বদলান<br>র — এলোমেলো করুন
+      </p>
+    </div>
+  </aside>
+
+  <main class="quizmain">
+    <div class="card" id="card">
+      <span class="qno" id="q-no">প্রশ্ন ০১ / ৮৮০</span>
+      <p class="q" id="q-text">—</p>
+      <p class="a hidden" id="q-ans">—</p>
+    </div>
+
+    <div class="quizbar">
+      <button class="btn" id="b-prev" type="button">← আগের</button>
+      <button class="btn" id="b-reveal" type="button">উত্তর দেখান</button>
+      <button class="btn" id="b-next" type="button">পরের →</button>
+      <button class="btn" id="b-shuffle" type="button">এলোমেলো</button>
+      <button class="btn" id="b-list" type="button">সব প্রশ্ন</button>
+      <span class="sp"></span>
+      <span class="pos" id="q-pos">১ / ৮৮০</span>
+    </div>
+
+    <div id="q-list" style="display:none;margin-top:26px"></div>
+  </main>
+</div>
+
+<footer class="foot">
+  <div class="f1"><span id="f-copy">Copyright © 2026. All rights reserved. সর্বস্বত্ব সংরক্ষিত</span></div>
+  <div class="f2"><a href="index.html">প্রথম পাতা</a> · <a href="study.html">পূর্ণ পাঠ</a></div>
+  <div class="f3">
+    <div class="f3-no">No. <span id="f-no">112026</span></div>
+    <div class="f3-credit">prepared by <b>Rifat</b></div>
+  </div>
+</footer>
+
+<div class="search" id="search" role="dialog" aria-modal="true" aria-label="খুঁজুন">
+  <div class="search-in">
+    <div class="search-bar">
+      <input id="search-input" type="search" placeholder="লেখকের নাম, বইয়ের নাম বা সাল লিখে খুঁজুন।" autocomplete="off">
+      <button class="search-close" id="search-close" aria-label="বন্ধ করুন">✕</button>
+    </div>
+    <div class="az" id="search-az" aria-label="অক্ষর দিয়ে ছাঁকুন"></div>
+    <div class="results" id="search-results"></div>
+  </div>
+</div>
+
+<div class="grain" aria-hidden="true"></div>
+
+<script src="data/site.js"></script>
+<script src="data/quiz.js"></script>
+<script src="data/read.js"></script>
+<script src="app.js"></script>
+<script>
+(function () {
+  var S = window.SITE;
+  var BD = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+  function bn(n){ return String(n).split('').map(function(c){ return (c>='0'&&c<='9') ? BD[+c] : c; }).join(''); }
+  function pad(n){ return (n<10?'0':'')+n; }
+
+  document.getElementById('f-copy').textContent = S.meta.copyright;
+  document.getElementById('f-no').textContent = S.meta.no;
+
+  var ALL = window.QUIZ || [];
+  /* pool holds indexes into ALL, so filtering never renumbers a question:
+     #qN always means the Nth question of the whole set (one-based). */
+  var pool = ALL.map(function(_, i){ return i; });
+  var idx = 0, revealed = false;
+  var seen = {};
+
+  document.getElementById('q-total').textContent = bn(ALL.length);
+
+  var elNo = document.getElementById('q-no'), elText = document.getElementById('q-text'),
+      elAns = document.getElementById('q-ans'), elPos = document.getElementById('q-pos'),
+      elBtn = document.getElementById('b-reveal'), elList = document.getElementById('q-list');
+
+  function paint() {
+    if (!pool.length) { elText.textContent = 'কোনো প্রশ্ন মেলেনি।'; elAns.textContent = '—'; return; }
+    var q = ALL[pool[idx]];
+    elNo.textContent = 'প্রশ্ন ' + pad(idx + 1) + ' / ' + bn(pool.length);
+    elText.textContent = q.q;
+    elAns.textContent = q.a || '—';
+    elAns.classList.add('hidden');
+    elBtn.textContent = 'উত্তর দেখান';
+    revealed = false;
+    elPos.textContent = bn(idx + 1) + ' / ' + bn(pool.length);
+    seen[q.q] = true;
+    var n = Object.keys(seen).length;
+    document.getElementById('q-seen').textContent = bn(n);
+    var p = n / ALL.length;
+    document.getElementById('q-bar').style.transform = 'scaleX(' + p + ')';
+    document.getElementById('q-pct').textContent = bn(Math.round(p * 100)) + '%';
+    var gh = '#q' + (pool[idx] + 1);
+    if (location.hash !== gh) history.replaceState(null, '', gh);
+  }
+  function reveal() {
+    if (revealed) { next(); return; }
+    elAns.classList.remove('hidden');
+    elBtn.textContent = 'পরের →';
+    revealed = true;
+  }
+  function next() { idx = (idx + 1) % pool.length; paint(); }
+  function prev() { idx = (idx - 1 + pool.length) % pool.length; paint(); }
+
+  document.getElementById('b-reveal').addEventListener('click', reveal);
+  document.getElementById('b-next').addEventListener('click', next);
+  document.getElementById('b-prev').addEventListener('click', prev);
+  document.getElementById('b-shuffle').addEventListener('click', function () {
+    for (var i = pool.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = pool[i]; pool[i] = pool[j]; pool[j] = t;
+    }
+    idx = 0; paint();
+    if (window.Search) window.Search.toast('এলোমেলো হয়েছে');
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)) return;
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); reveal(); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+  });
+
+  /* full list */
+  var listOpen = false;
+  document.getElementById('b-list').addEventListener('click', function () {
+    listOpen = !listOpen;
+    elList.style.display = listOpen ? 'block' : 'none';
+    this.classList.toggle('on', listOpen);
+    if (listOpen && !elList.childElementCount) {
+      elList.innerHTML = ALL.map(function (q, i) {
+        return '<div class="card" style="padding:14px 0"><span class="qno" style="margin-bottom:6px">' +
+          pad(i + 1) + '</span><p style="margin:0;font-size:18px;line-height:1.55">' + q.q +
+          '</p><p style="margin:8px 0 0;font-size:16px;line-height:1.6;color:var(--ink-2)">' + (q.a || '') + '</p></div>';
+      }).join('');
+    }
+    if (listOpen) elList.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  /* filter */
+  document.getElementById('q-filter').addEventListener('input', function () {
+    var f = this.value.trim();
+    pool = f ? ALL.map(function (_, i) { return i; }).filter(function (i) {
+      var q = ALL[i];
+      return (q.q + ' ' + q.a).indexOf(f) >= 0;
+    }) : ALL.map(function (_, i) { return i; });
+    idx = 0; paint();
+  });
+
+  /* deep link — #qN is one-based: #q1 is the first question of the full set */
+  function applyHash() {
+    var m = location.hash.match(/^#q(\d+)$/);
+    if (!m) return false;
+    var n = parseInt(m[1], 10) - 1;          /* -> zero-based index into ALL */
+    if (n < 0 || n >= ALL.length) return false;
+    var p = pool.indexOf(n);
+    if (p < 0) {
+      /* the question is hidden by the current filter — reveal it */
+      pool = ALL.map(function (_, i) { return i; });
+      document.getElementById('q-filter').value = '';
+      p = n;
+    }
+    idx = p;
+    paint();
+    return true;
+  }
+  window.addEventListener('hashchange', applyHash);
+  if (!applyHash()) paint();
+})();
+</script>
+</body>
+</html>
